@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/projects/")
 public class ProjectRestController {
 
     @Autowired
@@ -22,12 +22,12 @@ public class ProjectRestController {
 
     @GetMapping("")
     public ResponseEntity<List<Project>> findAll() {
-      try {
-          List <Project> projects = projectRepo.findAll();
-          return ResponseEntity.ok(projects);
-      }catch (Exception e) {
-          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-      }
+        try {
+            List<Project> projects = projectRepo.findAll();
+            return ResponseEntity.ok(projects);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PostMapping("")
@@ -35,7 +35,7 @@ public class ProjectRestController {
         try {
             projectService.saveOrUpdate(project);
             return ResponseEntity.status(HttpStatus.CREATED).body("Project saved");
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Project not saved");
         }
     }
