@@ -1,10 +1,8 @@
-package com.spring.crems.entity;
+package com.eiasin.crems.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -13,30 +11,27 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private long budget;
+    private Long budget;
     private Date startDate;
-    private Date ExpectedEndDate;
+    private Date expectedEndDate;
     private String projectType;
     private String description;
 
     @OneToOne
-    @JoinColumn(name = "projectManager_id")
+    @JoinColumn(name="project_manager", nullable = false)
     private ProjectManager projectManager;
-
-    @OneToMany
-    @JoinColumn(name = "building_id")
-    private List<Building> building;
 
     public Project() {
     }
 
-    public Project(int id, String name, long budget, Date startDate, Date expectedEndDate, String projectType, String description, ProjectManager projectManager) {
+    public Project(int id, String name, Long budget, Date startDate, Date expectedEndDate, String projectType, String description, ProjectManager projectManager) {
         this.id = id;
         this.name = name;
         this.budget = budget;
         this.startDate = startDate;
-        ExpectedEndDate = expectedEndDate;
+        this.expectedEndDate = expectedEndDate;
         this.projectType = projectType;
         this.description = description;
         this.projectManager = projectManager;
@@ -58,11 +53,11 @@ public class Project {
         this.name = name;
     }
 
-    public long getBudget() {
+    public Long getBudget() {
         return budget;
     }
 
-    public void setBudget(long budget) {
+    public void setBudget(Long budget) {
         this.budget = budget;
     }
 
@@ -75,11 +70,11 @@ public class Project {
     }
 
     public Date getExpectedEndDate() {
-        return ExpectedEndDate;
+        return expectedEndDate;
     }
 
     public void setExpectedEndDate(Date expectedEndDate) {
-        ExpectedEndDate = expectedEndDate;
+        this.expectedEndDate = expectedEndDate;
     }
 
     public String getProjectType() {

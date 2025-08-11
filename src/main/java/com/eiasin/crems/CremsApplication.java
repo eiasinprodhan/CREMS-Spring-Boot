@@ -1,4 +1,4 @@
-package com.spring.crems;
+package com.eiasin.crems;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
