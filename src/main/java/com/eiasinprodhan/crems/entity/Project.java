@@ -23,7 +23,6 @@ public class Project {
     @JoinColumn(name="project_manager", nullable = false)
     private ProjectManager projectManager;
 
-
     public Project() {
     }
 

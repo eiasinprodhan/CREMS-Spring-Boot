@@ -25,6 +25,6 @@ public class ProjectManager {
     private String country;
 
     @OneToMany
-    @JoinColumn(name = "Project_id", nullable = false)
+    @JoinColumn(name = "project_id", nullable = false)
     private List<Project> projects;
 }
