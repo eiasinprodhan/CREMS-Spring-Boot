@@ -1,4 +1,4 @@
-package com.eiasin.crems;
+package com.eiasinprodhan.crems;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -8,11 +8,11 @@
 		<version>3.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.eiasin</groupId>
+	<groupId>com.eiasinprodhan</groupId>
 	<artifactId>crems</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CREMS</name>
-	<description>Spring Boot Project For Corporate Real Estate Management</description>
+	<name>crems</name>
+	<description>Corporate Real Estate Management System</description>
 	<url/>
 	<licenses>
 		<license/>

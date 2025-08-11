@@ -1,4 +1,4 @@
-package com.eiasin.crems.entity;
+package com.eiasinprodhan.crems.entity;
 
 import jakarta.persistence.*;
 

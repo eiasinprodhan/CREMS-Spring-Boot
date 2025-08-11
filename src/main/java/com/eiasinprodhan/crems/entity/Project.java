@@ -1,4 +1,4 @@
-package com.eiasin.crems.entity;
+package com.eiasinprodhan.crems.entity;
 
 import jakarta.persistence.*;
 
@@ -22,7 +22,7 @@ public class Project {
     @OneToOne
     @JoinColumn(name="project_manager", nullable = false)
     private ProjectManager projectManager;
-    
+
 
     public Project() {
     }
