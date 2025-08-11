@@ -32,6 +32,7 @@ public class User implements UserDetails {
 
 
     @OneToMany
+    @Column(name="tokens")
     private List<Token> tokens;
 
 
