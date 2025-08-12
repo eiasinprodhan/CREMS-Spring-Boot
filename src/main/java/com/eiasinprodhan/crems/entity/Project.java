@@ -19,7 +19,7 @@ public class Project {
     private String projectType;
     private String description;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="project_manager", nullable = false)
     private ProjectManager projectManager;
 

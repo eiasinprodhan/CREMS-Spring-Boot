@@ -24,7 +24,6 @@ public class ProjectManager {
     private String photo;
     private String country;
 
-    @OneToMany
-    @JoinColumn(name = "project_id", nullable = false)
+    @OneToMany(mappedBy = "projectManager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Project> projects;
 }
