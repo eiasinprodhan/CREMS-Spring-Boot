@@ -18,7 +18,7 @@ public class ProjectManager {
     private String phone;
     private int nid;
     private Date joiningDate;
-    private String salaryType;
+    private String salarytype;
     private Long salary;
     private String status;
     private String photo;
@@ -30,14 +30,14 @@ public class ProjectManager {
     public ProjectManager() {
     }
 
-    public ProjectManager(int id, String name, String email, String phone, int nid, Date joiningDate, String salaryType, Long salary, String status, String photo, String country, List<Project> projects) {
+    public ProjectManager(int id, String name, String email, String phone, int nid, Date joiningDate, String salarytype, Long salary, String status, String photo, String country, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.nid = nid;
         this.joiningDate = joiningDate;
-        this.salaryType = salaryType;
+        this.salarytype = salarytype;
         this.salary = salary;
         this.status = status;
         this.photo = photo;
@@ -93,12 +93,12 @@ public class ProjectManager {
         this.joiningDate = joiningDate;
     }
 
-    public String getSalaryType() {
-        return salaryType;
+    public String getsalarytype() {
+        return salarytype;
     }
 
-    public void setSalaryType(String salaryType) {
-        this.salaryType = salaryType;
+    public void setsalarytype(String salarytype) {
+        this.salarytype = salarytype;
     }
 
     public Long getSalary() {

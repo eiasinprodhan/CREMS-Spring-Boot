@@ -35,7 +35,7 @@ public class ProjectManagerRestController {
         return projectManagerService.update(projectManager);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Integer id) {
         projectManagerService.delete(id);
     }
