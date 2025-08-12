@@ -24,13 +24,10 @@ public class ProjectManager {
     private String photo;
     private String country;
 
-    @OneToMany(mappedBy = "projectManager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Project> projects;
-
     public ProjectManager() {
     }
 
-    public ProjectManager(int id, String name, String email, String phone, int nid, Date joiningDate, String salarytype, Long salary, String status, String photo, String country, List<Project> projects) {
+    public ProjectManager(int id, String name, String email, String phone, int nid, Date joiningDate, String salarytype, Long salary, String status, String photo, String country) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -42,7 +39,6 @@ public class ProjectManager {
         this.status = status;
         this.photo = photo;
         this.country = country;
-        this.projects = projects;
     }
 
     public int getId() {
@@ -93,11 +89,11 @@ public class ProjectManager {
         this.joiningDate = joiningDate;
     }
 
-    public String getsalarytype() {
+    public String getSalarytype() {
         return salarytype;
     }
 
-    public void setsalarytype(String salarytype) {
+    public void setSalarytype(String salarytype) {
         this.salarytype = salarytype;
     }
 
@@ -131,13 +127,5 @@ public class ProjectManager {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
     }
 }

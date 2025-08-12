@@ -17,24 +17,21 @@ public class Project {
     private Date startDate;
     private Date expectedEndDate;
     private String projectType;
+    private int projectManager;
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name="project_manager", nullable = false)
-    private ProjectManager projectManager;
 
     public Project() {
     }
 
-    public Project(int id, String name, Long budget, Date startDate, Date expectedEndDate, String projectType, String description, ProjectManager projectManager) {
+    public Project(int id, String name, Long budget, Date startDate, Date expectedEndDate, String projectType, int projectManager, String description) {
         this.id = id;
         this.name = name;
         this.budget = budget;
         this.startDate = startDate;
         this.expectedEndDate = expectedEndDate;
         this.projectType = projectType;
-        this.description = description;
         this.projectManager = projectManager;
+        this.description = description;
     }
 
     public int getId() {
@@ -85,19 +82,19 @@ public class Project {
         this.projectType = projectType;
     }
 
+    public int getProjectManager() {
+        return projectManager;
+    }
+
+    public void setProjectManager(int projectManager) {
+        this.projectManager = projectManager;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ProjectManager getProjectManager() {
-        return projectManager;
-    }
-
-    public void setProjectManager(ProjectManager projectManager) {
-        this.projectManager = projectManager;
     }
 }
