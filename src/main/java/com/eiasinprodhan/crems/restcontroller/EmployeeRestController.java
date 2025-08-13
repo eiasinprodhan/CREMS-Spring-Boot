@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin("*")
 public class EmployeeRestController {
 
     @Autowired
@@ -22,6 +23,11 @@ public class EmployeeRestController {
     @GetMapping("/{id}")
     public Employee findById(@PathVariable int id) {
         return employeeService.findById(id);
+    }
+
+    @GetMapping
+    public List<Employee> findByRole(@RequestParam String role) {
+        return employeeService.findByRole(role);
     }
 
     @PostMapping("/")

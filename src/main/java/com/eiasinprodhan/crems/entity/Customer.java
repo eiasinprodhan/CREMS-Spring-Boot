@@ -23,7 +23,4 @@ public class Customer {
     private String photo;
     private String country;
 
-    @OneToOne
-    @JoinColumn(name = "unit_id", nullable = false)
-    private Unit unit;
 }

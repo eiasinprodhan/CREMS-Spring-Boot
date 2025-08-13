@@ -17,12 +17,4 @@ public class Booking {
     private Date date;
     private Double amount;
 
-    @OneToOne
-    @JoinColumn(name = "unit")
-    private Unit unit;
-
-    @OneToOne
-    @JoinColumn(name = "customer")
-    private Customer customer;
-
 }

@@ -23,7 +23,4 @@ public class SiteManager {
     private String photo;
     private String country;
 
-    @OneToMany
-    @JoinColumn(name = "building_id", nullable = false)
-    private List<Building> buildings;
 }

@@ -10,15 +10,12 @@ public class Floor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
-    @OneToOne
-    @JoinColumn(name = "building_id")
-    private Building building;
+    private int building;
 
     public Floor() {
     }
 
-    public Floor(int id, String name, Building building) {
+    public Floor(int id, String name, int building) {
         this.id = id;
         this.name = name;
         this.building = building;
@@ -40,11 +37,11 @@ public class Floor {
         this.name = name;
     }
 
-    public Building getBuilding() {
+    public int getBuilding() {
         return building;
     }
 
-    public void setBuilding(Building building) {
+    public void setBuilding(int building) {
         this.building = building;
     }
 }

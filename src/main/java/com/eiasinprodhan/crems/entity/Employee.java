@@ -22,7 +22,7 @@ public class Employee {
     private String phone;
 
     @Column(unique = true, nullable = false)
-    private int nid;
+    private Long nid;
     private Date joiningDate;
     private String role;
     private String salaryType;
@@ -37,7 +37,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String name, String email, String password, String phone, int nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary) {
+    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -96,11 +96,11 @@ public class Employee {
         this.phone = phone;
     }
 
-    public int getNid() {
+    public Long getNid() {
         return nid;
     }
 
-    public void setNid(int nid) {
+    public void setNid(Long nid) {
         this.nid = nid;
     }
 

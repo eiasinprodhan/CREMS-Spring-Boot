@@ -16,16 +16,4 @@ public class Unit {
     private int bathrooms;
     private Double amount;
     private boolean isBooked;
-
-    @OneToOne
-    @JoinColumn(name = "building_id")
-    private Building building;
-
-    @OneToOne
-    @JoinColumn(name = "floor_id")
-    private Floor floor;
-
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 }

@@ -11,7 +11,27 @@ import java.util.Optional;
 @Service
 public class ProjectService {
 
+    @Autowired
+    private IProjectRepository projectRepository;
 
+    public List<Project> findAll() {
+        return projectRepository.findAll();
+    }
 
+    public Project findById(Integer id) {
+        return projectRepository.findById(id).get();
+    }
+
+    public Project save(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public Project update(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public void deleteById(Integer id) {
+        projectRepository.deleteById(id);
+    }
 
 }

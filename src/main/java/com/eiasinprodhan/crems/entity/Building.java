@@ -2,8 +2,6 @@ package com.eiasinprodhan.crems.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "buildings")
 public class Building {
@@ -14,35 +12,26 @@ public class Building {
 
     private String name;
     private String type;
+    private String location;
+    private int project;
+    private int siteManager;
     private int floorCount;
     private int unitCount;
     private String photo;
 
-    @OneToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @OneToOne
-    @JoinColumn(name = "site_manager")
-    private SiteManager siteManager;
-
-    @OneToMany
-    @JoinColumn(name = "floor_id")
-    private List<Floor> floors;
-
     public Building() {
     }
 
-    public Building(int id, String name, String type, int floorCount, int unitCount, String photo, Project project, SiteManager siteManager, List<Floor> floors) {
+    public Building(int id, String name, String type, String location, int project, int siteManager, int floorCount, int unitCount, String photo) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.location = location;
+        this.project = project;
+        this.siteManager = siteManager;
         this.floorCount = floorCount;
         this.unitCount = unitCount;
         this.photo = photo;
-        this.project = project;
-        this.siteManager = siteManager;
-        this.floors = floors;
     }
 
     public int getId() {
@@ -69,6 +58,30 @@ public class Building {
         this.type = type;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getProject() {
+        return project;
+    }
+
+    public void setProject(int project) {
+        this.project = project;
+    }
+
+    public int getSiteManager() {
+        return siteManager;
+    }
+
+    public void setSiteManager(int siteManager) {
+        this.siteManager = siteManager;
+    }
+
     public int getFloorCount() {
         return floorCount;
     }
@@ -91,29 +104,5 @@ public class Building {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public SiteManager getSiteManager() {
-        return siteManager;
-    }
-
-    public void setSiteManager(SiteManager siteManager) {
-        this.siteManager = siteManager;
-    }
-
-    public List<Floor> getFloors() {
-        return floors;
-    }
-
-    public void setFloors(List<Floor> floors) {
-        this.floors = floors;
     }
 }

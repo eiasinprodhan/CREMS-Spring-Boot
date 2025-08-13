@@ -21,6 +21,9 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
 
+    public List<Employee> findByRole(String role) {
+        return employeeRepository.findByRole(role);
+    }
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }
