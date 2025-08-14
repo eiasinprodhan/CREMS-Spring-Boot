@@ -10,31 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rawmaterials/")
+@RequestMapping("/api/rawmaterials")
+@CrossOrigin("*")
 public class RawMaterialRestController {
 
     @Autowired
     private RawMaterialService  rawMaterialService;
 
-    @GetMapping("")
-    public ResponseEntity<List<RawMaterial>> getAllRawMaterials() {
-        try{
-            List<RawMaterial> rawMaterials =  rawMaterialService.findAll();
-            return new ResponseEntity<>(rawMaterials, HttpStatus.OK);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/")
+    public List<RawMaterial> findAll() {
+        return rawMaterialService.findAll();
     }
 
-    @PostMapping("save")
-    public ResponseEntity<RawMaterial> saveRawMaterial(@RequestBody RawMaterial rawMaterial) {
-        try {
-            rawMaterialService.save(rawMaterial);
-            return new ResponseEntity<>(rawMaterial, HttpStatus.OK);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping("/")
+    public RawMaterial update(@RequestBody RawMaterial rawMaterial) {
+        return rawMaterialService.save(rawMaterial);
     }
 }

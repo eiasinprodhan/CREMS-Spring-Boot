@@ -40,8 +40,8 @@ public class StageRestController {
         stageService.deleteById(id);
     }
 
-    @GetMapping
+    @GetMapping("")
     public List<Stage> findByFloor(@RequestParam Integer floor){
-        return findByFloor(floor);
+        return stageService.findAllByFloor(floor);
     }
 }

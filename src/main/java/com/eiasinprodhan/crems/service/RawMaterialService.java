@@ -13,8 +13,8 @@ public class RawMaterialService {
     @Autowired
     private IRawMaterialRepository rawMaterialRepository;
 
-    public void save(RawMaterial rawMaterial) {
-        rawMaterialRepository.save(rawMaterial);
+    public RawMaterial save(RawMaterial rawMaterial) {
+        return rawMaterialRepository.save(rawMaterial);
     }
 
     public List<RawMaterial> findAll() {
@@ -23,10 +23,6 @@ public class RawMaterialService {
 
     public RawMaterial findById(int id) {
         return rawMaterialRepository.findById(id).get();
-    }
-
-    public void edit(RawMaterial rawMaterial) {
-        rawMaterialRepository.save(rawMaterial);
     }
 
     public void delete(RawMaterial rawMaterial) {
