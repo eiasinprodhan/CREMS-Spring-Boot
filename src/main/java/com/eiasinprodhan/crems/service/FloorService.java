@@ -28,4 +28,8 @@ public class FloorService {
     public void deleteById(int id) {
         floorRepository.deleteById(id);
     }
+
+    public List<Floor> findAllByBuilding(int building) {
+        return floorRepository.findAllByBuilding(building);
+    }
 }

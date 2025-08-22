@@ -39,4 +39,9 @@ public class FloorRestController {
     public void delete(@PathVariable int id) {
         floorService.deleteById(id);
     }
+
+    @GetMapping("")
+    public List<Floor> findAllByBuilding(@RequestParam int building) {
+        return floorService.findAllByBuilding(building);
+    }
 }

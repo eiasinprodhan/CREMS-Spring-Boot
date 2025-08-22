@@ -39,4 +39,9 @@ public class BuildingRestController {
     public void deleteBuilding(@PathVariable int id) {
         buildingService.delete(id);
     }
+
+    @GetMapping("")
+    public List<Building> findAllByProject(@RequestParam Integer project) {
+        return buildingService.findAllByProject(project);
+    }
 }
