@@ -34,4 +34,8 @@ public class ProjectService {
         projectRepository.deleteById(id);
     }
 
+    public List<Project> findByProjectManager(Integer projectManager) {
+        return projectRepository.findProjectByProjectManager(projectManager);
+    }
+
 }

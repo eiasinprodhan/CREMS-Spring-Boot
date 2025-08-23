@@ -36,4 +36,8 @@ public class BuildingService {
     public List<Building> findAllByProject(int project) {
         return buildingRepository.findAllByProject(project);
     }
+
+    public List<Building> findBuildingsBySiteManager(int siteManager) {
+        return buildingRepository.findBuildingsBySiteManager(siteManager);
+    }
 }

@@ -2,6 +2,8 @@ package com.eiasinprodhan.crems.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "floors")
 public class Floor {
@@ -11,6 +13,7 @@ public class Floor {
     private int id;
     private String name;
     private int building;
+    private Date expectedEndDate;
 
     public Floor() {
     }

@@ -26,14 +26,15 @@ public class UnitRestController {
     }
 
     @PostMapping("/")
-    public Unit save(Unit unit) {
+    public Unit save(@RequestBody Unit unit) {
         return unitService.save(unit);
     }
 
     @PutMapping("/")
-    public Unit update(Unit unit) {
+    public Unit update(@RequestBody Unit unit) {
         return unitService.save(unit);
     }
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {

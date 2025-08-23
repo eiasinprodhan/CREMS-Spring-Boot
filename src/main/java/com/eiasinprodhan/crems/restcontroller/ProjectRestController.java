@@ -39,4 +39,11 @@ public class ProjectRestController {
     public void deleteProject(@PathVariable Integer id) {
         projectService.deleteById(id);
     }
+
+    @GetMapping("")
+    public List<Project> findProjectByProjectManager(@RequestParam Integer projectManager) {
+        return projectService.findByProjectManager(projectManager);
+    }
+
+
 }

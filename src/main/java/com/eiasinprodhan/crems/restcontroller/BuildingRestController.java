@@ -44,4 +44,9 @@ public class BuildingRestController {
     public List<Building> findAllByProject(@RequestParam Integer project) {
         return buildingService.findAllByProject(project);
     }
+
+    @GetMapping("/siteManager")
+    public List<Building> findBuildingsBySiteManager(@RequestParam Integer siteManager) {
+        return buildingService.findBuildingsBySiteManager(siteManager);
+    }
 }

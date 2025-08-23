@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IBuildingRepository extends JpaRepository<Building, Integer> {
-    List<Building> findAllByProject(int project);
+    List<Building> findAllByProject(Integer project);
+    List<Building> findBuildingsBySiteManager(Integer siteManager);
 }
