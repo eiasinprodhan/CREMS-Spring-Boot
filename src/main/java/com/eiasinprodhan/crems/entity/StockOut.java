@@ -5,29 +5,31 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "transactions")
-public class Transaction {
+@Table(name = "stock_out_details")
+public class StockOut {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private int stageId;
+    private int rawMaterialId;
     private String name;
     private Date date;
     private Long quantity;
-    private Double amount;
-    private boolean status;
+    private String unit;
 
-    public Transaction() {
+    public StockOut() {
     }
 
-    public Transaction(int id, String name, Date date, Long quantity, Double amount, boolean status) {
+    public StockOut(int id, int stageId, int rawMaterialId, String name, Date date, Long quantity, String unit) {
         this.id = id;
+        this.stageId = stageId;
+        this.rawMaterialId = rawMaterialId;
         this.name = name;
         this.date = date;
         this.quantity = quantity;
-        this.amount = amount;
-        this.status = status;
+        this.unit = unit;
     }
 
     public int getId() {
@@ -36,6 +38,22 @@ public class Transaction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStageId() {
+        return stageId;
+    }
+
+    public void setStageId(int stageId) {
+        this.stageId = stageId;
+    }
+
+    public int getRawMaterialId() {
+        return rawMaterialId;
+    }
+
+    public void setRawMaterialId(int rawMaterialId) {
+        this.rawMaterialId = rawMaterialId;
     }
 
     public String getName() {
@@ -62,19 +80,11 @@ public class Transaction {
         this.quantity = quantity;
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }
