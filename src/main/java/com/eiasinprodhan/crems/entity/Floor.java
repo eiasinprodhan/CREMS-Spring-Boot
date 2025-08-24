@@ -18,10 +18,11 @@ public class Floor {
     public Floor() {
     }
 
-    public Floor(int id, String name, int building) {
+    public Floor(int id, String name, int building, Date expectedEndDate) {
         this.id = id;
         this.name = name;
         this.building = building;
+        this.expectedEndDate = expectedEndDate;
     }
 
     public int getId() {
@@ -46,5 +47,13 @@ public class Floor {
 
     public void setBuilding(int building) {
         this.building = building;
+    }
+
+    public Date getExpectedEndDate() {
+        return expectedEndDate;
+    }
+
+    public void setExpectedEndDate(Date expectedEndDate) {
+        this.expectedEndDate = expectedEndDate;
     }
 }
