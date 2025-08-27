@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/stockindetails")
+@CrossOrigin("*")
 public class StockInRestController {
 
     @Autowired

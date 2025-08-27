@@ -22,8 +22,9 @@ public class RawMaterialRestController {
         return rawMaterialService.findAll();
     }
 
-    @PostMapping("/")
+    @PutMapping("/")
     public RawMaterial update(@RequestBody RawMaterial rawMaterial) {
         return rawMaterialService.save(rawMaterial);
     }
+
 }

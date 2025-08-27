@@ -14,20 +14,18 @@ public class Transaction {
 
     private String name;
     private Date date;
-    private Long quantity;
     private Double amount;
-    private boolean status;
+    private boolean credit;
 
     public Transaction() {
     }
 
-    public Transaction(int id, String name, Date date, Long quantity, Double amount, boolean status) {
+    public Transaction(int id, String name, Date date, Double amount, boolean credit) {
         this.id = id;
         this.name = name;
         this.date = date;
-        this.quantity = quantity;
         this.amount = amount;
-        this.status = status;
+        this.credit = credit;
     }
 
     public int getId() {
@@ -54,14 +52,6 @@ public class Transaction {
         this.date = date;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
     public Double getAmount() {
         return amount;
     }
@@ -70,11 +60,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isCredit() {
+        return credit;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCredit(boolean credit) {
+        this.credit = credit;
     }
 }
