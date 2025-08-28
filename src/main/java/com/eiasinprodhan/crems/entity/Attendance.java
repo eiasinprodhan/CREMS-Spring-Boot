@@ -14,14 +14,14 @@ public class Attendance {
 
     private Integer employeeId;
     private Integer stageId;
-    private Date date;
+    private String date;
     private String status;
     private Double salary;
 
     public Attendance() {
     }
 
-    public Attendance(Integer id, Integer employeeId, Integer stageId, Date date, String status, Double salary) {
+    public Attendance(Integer id, Integer employeeId, Integer stageId, String date, String status, Double salary) {
         this.id = id;
         this.employeeId = employeeId;
         this.stageId = stageId;
@@ -54,11 +54,11 @@ public class Attendance {
         this.stageId = stageId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
