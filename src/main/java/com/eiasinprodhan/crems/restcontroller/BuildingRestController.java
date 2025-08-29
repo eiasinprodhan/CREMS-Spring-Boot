@@ -2,8 +2,11 @@ package com.eiasinprodhan.crems.restcontroller;
 
 import com.eiasinprodhan.crems.entity.Building;
 import com.eiasinprodhan.crems.service.BuildingService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,13 +29,25 @@ public class BuildingRestController {
     }
 
     @PostMapping("/")
-    public Building createBuilding(@RequestBody Building building) {
-        return buildingService.saveBuilding(building);
+    public Building createBuilding(
+            @RequestPart(value = "building") String buildingJson,
+            @RequestParam(value = "photo")MultipartFile file
+            ) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Building building = mapper.readValue(buildingJson, Building.class);
+
+        return buildingService.saveBuilding(building, file);
     }
 
     @PutMapping("/")
-    public Building updateBuilding(@RequestBody Building building) {
-        return buildingService.updateBuilding(building);
+    public Building updateBuilding(
+            @RequestPart(value = "building") String buildingJson,
+            @RequestParam(value = "photo")MultipartFile file
+    ) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Building building = mapper.readValue(buildingJson, Building.class);
+
+        return buildingService.saveBuilding(building, file);
     }
 
     @DeleteMapping("/{id}")
