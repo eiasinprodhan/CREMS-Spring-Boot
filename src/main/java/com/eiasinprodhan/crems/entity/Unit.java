@@ -53,6 +53,14 @@ public class Unit {
         this.id = id;
     }
 
+    public String getName(){
+        return unitNumber;
+    }
+
+    public void setName(String name){
+        this.unitNumber = name;
+    }
+
     public int getFloorId() {
         return floorId;
     }
