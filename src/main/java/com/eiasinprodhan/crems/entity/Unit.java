@@ -21,18 +21,17 @@ public class Unit {
     private int bedrooms;
     private int bathrooms;
     private boolean isBooked;
-    private int customerId;
 
     @ElementCollection
     private List<String> photoUrls;
 
     private Double price;
-    private int interestRate;
+    private Double interestRate;
 
     public Unit() {
     }
 
-    public Unit(int id, int floorId, int buildingId, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, int customerId, List<String> photoUrls, Double price, int interestRate) {
+    public Unit(int id, int floorId, int buildingId, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, List<String> photoUrls, Double price, Double interestRate) {
         this.id = id;
         this.floorId = floorId;
         this.buildingId = buildingId;
@@ -41,7 +40,6 @@ public class Unit {
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.isBooked = isBooked;
-        this.customerId = customerId;
         this.photoUrls = photoUrls;
         this.price = price;
         this.interestRate = interestRate;
@@ -111,14 +109,6 @@ public class Unit {
         isBooked = booked;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
     public List<String> getPhotoUrls() {
         return photoUrls;
     }
@@ -135,11 +125,11 @@ public class Unit {
         this.price = price;
     }
 
-    public int getInterestRate() {
+    public Double getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(int interestRate) {
+    public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
     }
 
