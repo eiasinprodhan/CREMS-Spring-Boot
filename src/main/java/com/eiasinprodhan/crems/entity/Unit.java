@@ -27,11 +27,12 @@ public class Unit {
     private List<String> photoUrls;
 
     private Double price;
+    private int interestRate;
 
     public Unit() {
     }
 
-    public Unit(int id, int floorId, int buildingId, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, int customerId, List<String> photoUrls, Double price) {
+    public Unit(int id, int floorId, int buildingId, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, int customerId, List<String> photoUrls, Double price, int interestRate) {
         this.id = id;
         this.floorId = floorId;
         this.buildingId = buildingId;
@@ -43,6 +44,7 @@ public class Unit {
         this.customerId = customerId;
         this.photoUrls = photoUrls;
         this.price = price;
+        this.interestRate = interestRate;
     }
 
     public int getId() {
@@ -51,14 +53,6 @@ public class Unit {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName(){
-        return unitNumber;
-    }
-
-    public void setName(String name){
-        this.unitNumber = name;
     }
 
     public int getFloorId() {
@@ -139,5 +133,21 @@ public class Unit {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public int getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(int interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public String getName(){
+        return unitNumber;
+    }
+
+    public void setName(String name){
+        this.unitNumber = name;
     }
 }
