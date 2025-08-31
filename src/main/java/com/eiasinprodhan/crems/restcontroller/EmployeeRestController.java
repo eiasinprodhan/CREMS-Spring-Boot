@@ -2,8 +2,11 @@ package com.eiasinprodhan.crems.restcontroller;
 
 import com.eiasinprodhan.crems.entity.Employee;
 import com.eiasinprodhan.crems.service.EmployeeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,8 +34,13 @@ public class EmployeeRestController {
     }
 
     @PostMapping("/")
-    public Employee save(@RequestBody Employee employee) {
-        return employeeService.save(employee);
+    public Employee save(
+            @RequestPart(value = "employee") String employeeJson,
+            @RequestParam(value = "photo") MultipartFile file
+    ) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Employee employee = objectMapper.readValue(employeeJson, Employee.class);
+        return employeeService.save(employee, file);
     }
 
     @PutMapping("/")

@@ -4,6 +4,7 @@ import com.eiasinprodhan.crems.entity.Employee;
 import com.eiasinprodhan.crems.repository.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ public class EmployeeService {
 
     @Autowired
     private IEmployeeRepository employeeRepository;
+
+    @Autowired
+    private PhotoService photoService;
 
     public List<Employee> findAll() {
         return employeeRepository.findAll();
@@ -24,7 +28,12 @@ public class EmployeeService {
     public List<Employee> findByRole(String role) {
         return employeeRepository.findByRole(role);
     }
-    public Employee save(Employee employee) {
+
+    public Employee save(Employee employee, MultipartFile file) {
+        if(file != null && !file.isEmpty()) {
+            String fileName = photoService.savePhoto(employee, "/employees",  file);
+            employee.setPhoto(fileName);
+        }
         return employeeRepository.save(employee);
     }
 
