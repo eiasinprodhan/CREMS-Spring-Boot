@@ -11,7 +11,7 @@ public class Unit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     private int floorId;
     private int buildingId;
 

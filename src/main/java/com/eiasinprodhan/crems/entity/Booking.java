@@ -26,11 +26,12 @@ public class Booking {
     private Double amount;
     private Double discount;
     private Double dueAmount;
+    private Double emiAmount;
 
     public Booking() {
     }
 
-    public Booking(int id, int buildingId, int floorId, int unitId, int customerId, Date date, boolean isLoan, double downPayment, Double interestRate, int year, Double amount, Double discount, Double dueAmount) {
+    public Booking(int id, int buildingId, int floorId, int unitId, int customerId, Date date, boolean isLoan, double downPayment, Double interestRate, int year, Double amount, Double discount, Double dueAmount, Double emiAmount) {
         this.id = id;
         this.buildingId = buildingId;
         this.floorId = floorId;
@@ -44,6 +45,7 @@ public class Booking {
         this.amount = amount;
         this.discount = discount;
         this.dueAmount = dueAmount;
+        this.emiAmount = emiAmount;
     }
 
     public int getId() {
@@ -148,5 +150,13 @@ public class Booking {
 
     public void setDueAmount(Double dueAmount) {
         this.dueAmount = dueAmount;
+    }
+
+    public Double getEmiAmount() {
+        return emiAmount;
+    }
+
+    public void setEmiAmount(Double emiAmount) {
+        this.emiAmount = emiAmount;
     }
 }
