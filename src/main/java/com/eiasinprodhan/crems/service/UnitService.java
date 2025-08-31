@@ -42,4 +42,8 @@ public class UnitService {
     public void delete(Integer id) {
         unitRepository.deleteById(id);
     }
+
+    public List<Unit> findByBuildingId(int buildingId) {
+        return unitRepository.findUnitByBuildingId(buildingId);
+    }
 }

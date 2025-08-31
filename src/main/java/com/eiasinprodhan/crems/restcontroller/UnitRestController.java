@@ -59,4 +59,9 @@ public class UnitRestController {
     public void delete(@PathVariable Integer id) {
         unitService.delete(id);
     }
+
+    @GetMapping("/productdetails/{id}")
+    public List<Unit> findUnitByBuildingId(@PathVariable Integer id) {
+        return unitService.findByBuildingId(id);
+    }
 }
