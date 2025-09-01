@@ -44,4 +44,13 @@ public class EmployeeService {
     public void delete(int id) {
         employeeRepository.deleteById(id);
     }
+
+    public Employee login(String email, String password) {
+        Employee employee = employeeRepository.findByEmail(email);
+
+        if (!employee.getPassword().equals(password)) {
+            throw new RuntimeException("Wrong password.");
+        };
+        return employee;
+    }
 }

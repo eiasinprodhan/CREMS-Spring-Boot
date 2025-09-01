@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findByRole(String role);
+    Employee findByEmail(String email);
 }
