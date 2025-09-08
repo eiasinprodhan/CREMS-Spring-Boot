@@ -1,5 +1,7 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,7 +18,11 @@ public class Project {
     private Date startDate;
     private Date expectedEndDate;
     private String projectType;
-    private int projectManager;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_manager_id")
+    @JsonBackReference
+    private Employee projectManager;
 
     @Lob
     private String description;
@@ -24,7 +30,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(int id, String name, Long budget, Date startDate, Date expectedEndDate, String projectType, int projectManager, String description) {
+    public Project(int id, String name, Long budget, Date startDate, Date expectedEndDate, String projectType, Employee projectManager, String description) {
         this.id = id;
         this.name = name;
         this.budget = budget;
@@ -83,11 +89,11 @@ public class Project {
         this.projectType = projectType;
     }
 
-    public int getProjectManager() {
+    public Employee getProjectManager() {
         return projectManager;
     }
 
-    public void setProjectManager(int projectManager) {
+    public void setProjectManager(Employee projectManager) {
         this.projectManager = projectManager;
     }
 

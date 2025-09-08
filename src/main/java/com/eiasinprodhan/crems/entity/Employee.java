@@ -1,8 +1,11 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -34,10 +37,14 @@ public class Employee {
     private Double totalSalary;
     private Date lastSalary;
 
+    @OneToMany(mappedBy = "projectManager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Project> projects;
+
     public Employee() {
     }
 
-    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary) {
+    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,6 +61,7 @@ public class Employee {
         this.address = address;
         this.totalSalary = totalSalary;
         this.lastSalary = lastSalary;
+        this.projects = projects;
     }
 
     public int getId() {
@@ -182,5 +190,13 @@ public class Employee {
 
     public void setLastSalary(Date lastSalary) {
         this.lastSalary = lastSalary;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
