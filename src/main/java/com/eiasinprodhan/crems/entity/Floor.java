@@ -1,8 +1,11 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "floors")
@@ -12,17 +15,25 @@ public class Floor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int building;
     private Date expectedEndDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id")
+    @JsonBackReference
+    private Building building;
+
+    @OneToMany(mappedBy = "floor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Stage> stages;
 
     public Floor() {
     }
 
-    public Floor(int id, String name, int building, Date expectedEndDate) {
+    public Floor(int id, String name, Date expectedEndDate, Building building) {
         this.id = id;
         this.name = name;
-        this.building = building;
         this.expectedEndDate = expectedEndDate;
+        this.building = building;
     }
 
     public int getId() {
@@ -41,19 +52,19 @@ public class Floor {
         this.name = name;
     }
 
-    public int getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(int building) {
-        this.building = building;
-    }
-
     public Date getExpectedEndDate() {
         return expectedEndDate;
     }
 
     public void setExpectedEndDate(Date expectedEndDate) {
         this.expectedEndDate = expectedEndDate;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 }

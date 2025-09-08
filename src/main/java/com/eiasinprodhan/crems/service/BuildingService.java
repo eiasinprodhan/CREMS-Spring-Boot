@@ -38,10 +38,10 @@ public class BuildingService {
     }
 
     public List<Building> findAllByProject(int project) {
-        return buildingRepository.findAllByProject(project);
+        return buildingRepository.findBuildingsByProject_Id(project);
     }
 
     public List<Building> findBuildingsBySiteManager(int siteManager) {
-        return buildingRepository.findBuildingsBySiteManager(siteManager);
+        return buildingRepository.findBuildingsBySiteManager_Id(siteManager);
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IProjectRepository extends JpaRepository<Project, Integer> {
-    List<Project> findProjectByProjectManagerId(Integer projectManagerId);
+    List<Project> findProjectByProjectManager_Id(int projectManagerId);
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IStageRepository extends JpaRepository<Stage, Integer> {
-    List<Stage> findAllByFloor(Integer floor);
+    List<Stage> findStageByFloor_Id(int floorId);
 }

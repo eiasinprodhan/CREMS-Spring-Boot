@@ -34,7 +34,7 @@ public class ProjectService {
     }
 
     public List<Project> findByProjectManager(Integer projectManager) {
-        return projectRepository.findProjectByProjectManagerId(projectManager);
+        return projectRepository.findProjectByProjectManager_Id(projectManager);
     }
 
 }

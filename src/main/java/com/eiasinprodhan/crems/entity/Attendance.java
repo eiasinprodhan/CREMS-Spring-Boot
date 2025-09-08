@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,22 +13,30 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer employeeId;
-    private Integer stageId;
     private String date;
     private String status;
     private Double salary;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    @JsonBackReference
+    private Employee employee;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stage_id")
+    @JsonBackReference
+    private Stage stage;
+
     public Attendance() {
     }
 
-    public Attendance(Integer id, Integer employeeId, Integer stageId, String date, String status, Double salary) {
+    public Attendance(Integer id, String date, String status, Double salary, Employee employee, Stage stage) {
         this.id = id;
-        this.employeeId = employeeId;
-        this.stageId = stageId;
         this.date = date;
         this.status = status;
         this.salary = salary;
+        this.employee = employee;
+        this.stage = stage;
     }
 
     public Integer getId() {
@@ -36,22 +45,6 @@ public class Attendance {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public Integer getStageId() {
-        return stageId;
-    }
-
-    public void setStageId(Integer stageId) {
-        this.stageId = stageId;
     }
 
     public String getDate() {
@@ -76,5 +69,21 @@ public class Attendance {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

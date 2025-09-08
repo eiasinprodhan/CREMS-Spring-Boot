@@ -1,6 +1,9 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "buildings")
@@ -13,25 +16,37 @@ public class Building {
     private String name;
     private String type;
     private String location;
-    private int project;
-    private int siteManager;
     private int floorCount;
     private int unitCount;
     private String photo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    @JsonManagedReference
+    private Project project;
+
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Floor> floors;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "site_manager_id")
+    @JsonManagedReference
+    private Employee siteManager;
+
     public Building() {
     }
 
-    public Building(int id, String name, String type, String location, int project, int siteManager, int floorCount, int unitCount, String photo) {
+    public Building(int id, String name, String type, String location, int floorCount, int unitCount, String photo, Project project, Employee siteManager) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.location = location;
-        this.project = project;
-        this.siteManager = siteManager;
         this.floorCount = floorCount;
         this.unitCount = unitCount;
         this.photo = photo;
+        this.project = project;
+        this.siteManager = siteManager;
     }
 
     public int getId() {
@@ -66,22 +81,6 @@ public class Building {
         this.location = location;
     }
 
-    public int getProject() {
-        return project;
-    }
-
-    public void setProject(int project) {
-        this.project = project;
-    }
-
-    public int getSiteManager() {
-        return siteManager;
-    }
-
-    public void setSiteManager(int siteManager) {
-        this.siteManager = siteManager;
-    }
-
     public int getFloorCount() {
         return floorCount;
     }
@@ -104,5 +103,21 @@ public class Building {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Employee getSiteManager() {
+        return siteManager;
+    }
+
+    public void setSiteManager(Employee siteManager) {
+        this.siteManager = siteManager;
     }
 }

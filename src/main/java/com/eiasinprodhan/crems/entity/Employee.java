@@ -41,10 +41,18 @@ public class Employee {
     @JsonManagedReference
     private List<Project> projects;
 
+    @OneToMany(mappedBy = "siteManager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Building> buildings;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    List<Attendance> attendances;
+
     public Employee() {
     }
 
-    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary, List<Project> projects) {
+    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary, List<Project> projects, List<Building> buildings) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -62,6 +70,7 @@ public class Employee {
         this.totalSalary = totalSalary;
         this.lastSalary = lastSalary;
         this.projects = projects;
+        this.buildings = buildings;
     }
 
     public int getId() {
@@ -198,5 +207,13 @@ public class Employee {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(List<Building> buildings) {
+        this.buildings = buildings;
     }
 }

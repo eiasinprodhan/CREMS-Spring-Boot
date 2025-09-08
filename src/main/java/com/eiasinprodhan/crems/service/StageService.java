@@ -30,6 +30,6 @@ public class StageService {
     }
 
     public List<Stage> findAllByFloor(Integer floor){
-        return stageRepository.findAllByFloor(floor);
+        return stageRepository.findStageByFloor_Id(floor);
     }
 }

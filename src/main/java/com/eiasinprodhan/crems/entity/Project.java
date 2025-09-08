@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -23,6 +24,10 @@ public class Project {
     @JoinColumn(name = "project_manager_id")
     @JsonBackReference
     private Employee projectManager;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Building> buildings;
 
     @Lob
     private String description;

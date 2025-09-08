@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,15 +16,23 @@ public class Stage {
     private String name;
     private Date startDate;
     private Date endDate;
-    private int floor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "floor_id")
+    @JsonBackReference
+    private Floor floor;
+
+    @OneToMany(mappedBy = "stage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Attendance>  attendances;
 
     @ElementCollection
-    List<Integer> labours;
+    private List<Integer> labours;
 
     public Stage() {
     }
 
-    public Stage(int id, String name, Date startDate, Date endDate, int floor, List<Integer> labours) {
+    public Stage(int id, String name, Date startDate, Date endDate, Floor floor, List<Integer> labours) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -64,11 +73,11 @@ public class Stage {
         this.endDate = endDate;
     }
 
-    public int getFloor() {
+    public Floor getFloor() {
         return floor;
     }
 
-    public void setFloor(int floor) {
+    public void setFloor(Floor floor) {
         this.floor = floor;
     }
 

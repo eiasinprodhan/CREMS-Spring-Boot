@@ -30,6 +30,6 @@ public class FloorService {
     }
 
     public List<Floor> findAllByBuilding(int building) {
-        return floorRepository.findAllByBuilding(building);
+        return floorRepository.findFloorByBuilding_Id(building);
     }
 }
