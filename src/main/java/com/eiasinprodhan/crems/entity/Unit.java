@@ -38,10 +38,13 @@ public class Unit {
     @ElementCollection
     private List<String> photoUrls;
 
+    private Double price;
+    private Double interestRate;
+
     public Unit() {
     }
 
-    public Unit(int id, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, Building building, Floor floor, List<String> photoUrls) {
+    public Unit(int id, String unitNumber, Double area, int bedrooms, int bathrooms, boolean isBooked, Building building, Floor floor, List<Booking> bookings, List<String> photoUrls, Double price, Double interestRate) {
         this.id = id;
         this.unitNumber = unitNumber;
         this.area = area;
@@ -50,7 +53,10 @@ public class Unit {
         this.isBooked = isBooked;
         this.building = building;
         this.floor = floor;
+        this.bookings = bookings;
         this.photoUrls = photoUrls;
+        this.price = price;
+        this.interestRate = interestRate;
     }
 
     public int getId() {
@@ -117,12 +123,44 @@ public class Unit {
         this.floor = floor;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     public List<String> getPhotoUrls() {
         return photoUrls;
     }
 
     public void setPhotoUrls(List<String> photoUrls) {
         this.photoUrls = photoUrls;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(Double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public String getName(){
+        return unitNumber;
+    }
+
+    public void setName(String name){
+        this.unitNumber = name;
     }
 }
 
