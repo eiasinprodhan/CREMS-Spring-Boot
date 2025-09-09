@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,24 +11,29 @@ public class StagePayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int stageId;
     private String date;
     private boolean paid = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stage_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Stage stage;
 
     public StagePayment() {
     }
 
-    public StagePayment(boolean paid, String date, int stageId, int id) {
-        this.paid = paid;
-        this.date = date;
-        this.stageId = stageId;
+    public StagePayment(String date, boolean paid, Stage stage) {
         this.id = id;
+        this.date = date;
+        this.paid = paid;
+        this.stage = stage;
     }
 
-    public StagePayment(int stageId, String date, boolean paid) {
-        this.paid = paid;
+    public StagePayment(int id, String date, boolean paid, Stage stage) {
+        this.id = id;
         this.date = date;
-        this.stageId = stageId;
+        this.paid = paid;
+        this.stage = stage;
     }
 
     public int getId() {
@@ -36,14 +42,6 @@ public class StagePayment {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getStageId() {
-        return stageId;
-    }
-
-    public void setStageId(int stageId) {
-        this.stageId = stageId;
     }
 
     public String getDate() {
@@ -60,5 +58,13 @@ public class StagePayment {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

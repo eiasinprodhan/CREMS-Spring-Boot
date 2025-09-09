@@ -1,7 +1,7 @@
 package com.eiasinprodhan.crems.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -38,16 +38,17 @@ public class Employee {
     private Date lastSalary;
 
     @OneToMany(mappedBy = "projectManager", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Project> projects;
 
     @OneToMany(mappedBy = "siteManager", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Building> buildings;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
-    List<Attendance> attendances;
+    @JsonIgnore
+    private List<Attendance> attendances;
+
 
     public Employee() {
     }

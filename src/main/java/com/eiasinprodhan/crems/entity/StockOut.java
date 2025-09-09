@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,24 +13,32 @@ public class StockOut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int stageId;
-    private int rawMaterialId;
     private String name;
     private Date date;
     private Long quantity;
     private String unit;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "raw_materials_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private RawMaterial rawMaterial;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stage_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Stage stage;
+
     public StockOut() {
     }
 
-    public StockOut(int id, int stageId, int rawMaterialId, String name, Date date, Long quantity, String unit) {
+    public StockOut(int id, String name, Date date, Long quantity, String unit, RawMaterial rawMaterial, Stage stage) {
         this.id = id;
-        this.stageId = stageId;
-        this.rawMaterialId = rawMaterialId;
         this.name = name;
         this.date = date;
         this.quantity = quantity;
         this.unit = unit;
+        this.rawMaterial = rawMaterial;
+        this.stage = stage;
     }
 
     public int getId() {
@@ -38,22 +47,6 @@ public class StockOut {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getStageId() {
-        return stageId;
-    }
-
-    public void setStageId(int stageId) {
-        this.stageId = stageId;
-    }
-
-    public int getRawMaterialId() {
-        return rawMaterialId;
-    }
-
-    public void setRawMaterialId(int rawMaterialId) {
-        this.rawMaterialId = rawMaterialId;
     }
 
     public String getName() {
@@ -86,5 +79,21 @@ public class StockOut {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public RawMaterial getRawMaterial() {
+        return rawMaterial;
+    }
+
+    public void setRawMaterial(RawMaterial rawMaterial) {
+        this.rawMaterial = rawMaterial;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

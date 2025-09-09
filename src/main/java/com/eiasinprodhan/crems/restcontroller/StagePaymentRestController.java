@@ -22,6 +22,6 @@ public class StagePaymentRestController {
 
     @PostMapping("/")
     public StagePayment savePayment(@RequestBody StagePayment payload) {
-        return service.savePayment(payload.getStageId(), payload.getDate(), payload.isPaid());
+        return service.savePayment(payload.getStage(), payload.getDate(), payload.isPaid());
     }
 }

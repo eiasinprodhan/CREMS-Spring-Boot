@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,7 +13,6 @@ public class StockIn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int rawMaterialId;
     private String name;
     private Date date;
     private Long quantity;
@@ -21,12 +21,16 @@ public class StockIn {
     private String supplier;
     private Double totalprice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "raw_materials_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private RawMaterial rawMaterial;
+
     public StockIn() {
     }
 
-    public StockIn(int id, int rawMaterialId, String name, Date date, Long quantity, String unit, Double unitPrice, String supplier, Double totalprice) {
+    public StockIn(int id, String name, Date date, Long quantity, String unit, Double unitPrice, String supplier, Double totalprice, RawMaterial rawMaterial) {
         this.id = id;
-        this.rawMaterialId = rawMaterialId;
         this.name = name;
         this.date = date;
         this.quantity = quantity;
@@ -34,6 +38,7 @@ public class StockIn {
         this.unitPrice = unitPrice;
         this.supplier = supplier;
         this.totalprice = totalprice;
+        this.rawMaterial = rawMaterial;
     }
 
     public int getId() {
@@ -42,14 +47,6 @@ public class StockIn {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getRawMaterialId() {
-        return rawMaterialId;
-    }
-
-    public void setRawMaterialId(int rawMaterialId) {
-        this.rawMaterialId = rawMaterialId;
     }
 
     public String getName() {
@@ -106,5 +103,13 @@ public class StockIn {
 
     public void setTotalprice(Double totalprice) {
         this.totalprice = totalprice;
+    }
+
+    public RawMaterial getRawMaterial() {
+        return rawMaterial;
+    }
+
+    public void setRawMaterial(RawMaterial rawMaterial) {
+        this.rawMaterial = rawMaterial;
     }
 }

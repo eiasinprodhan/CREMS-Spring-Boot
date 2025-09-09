@@ -1,5 +1,6 @@
 package com.eiasinprodhan.crems.service;
 
+import com.eiasinprodhan.crems.entity.Stage;
 import com.eiasinprodhan.crems.entity.StagePayment;
 import com.eiasinprodhan.crems.repository.IStagePaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class StagePaymentService {
         return repository.findByStageId(stageId);
     }
 
-    public StagePayment savePayment(Integer stageId, String date, boolean paid) {
-        StagePayment existing = repository.findByStageIdAndDate(stageId, date);
+    public StagePayment savePayment(Stage stage, String date, boolean paid) {
+        StagePayment existing = repository.findByStageIdAndDate(stage.getId(), date);
         if (existing != null) {
             existing.setPaid(paid);
             return repository.save(existing);
         } else {
-            StagePayment newPayment = new StagePayment(stageId, date, paid);
+            StagePayment newPayment = new StagePayment(date, paid, stage);
             return repository.save(newPayment);
         }
     }

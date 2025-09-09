@@ -1,6 +1,9 @@
 package com.eiasinprodhan.crems.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "raw_materials")
@@ -12,6 +15,14 @@ public class RawMaterial {
     private String name;
     private Long quantity;
     private String unit;
+
+    @OneToMany(mappedBy = "rawMaterial", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<StockIn> stockIns;
+
+    @OneToMany(mappedBy = "rawMaterial", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<StockOut> stockOuts;
 
     public RawMaterial() {
     }

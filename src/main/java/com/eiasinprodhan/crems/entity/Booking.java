@@ -1,8 +1,7 @@
 package com.eiasinprodhan.crems.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 
@@ -14,10 +13,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int buildingId;
-    private int floorId;
-    private int unitId;
-    private int customerId;
     private Date date;
     private boolean isLoan;
     private double downPayment;
@@ -28,15 +23,31 @@ public class Booking {
     private Double dueAmount;
     private Double emiAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private  Building building;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "floor_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private  Floor floor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "unit_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private  Unit unit;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private  Customer customer;
+
     public Booking() {
     }
 
-    public Booking(int id, int buildingId, int floorId, int unitId, int customerId, Date date, boolean isLoan, double downPayment, Double interestRate, int year, Double amount, Double discount, Double dueAmount, Double emiAmount) {
+    public Booking(int id, Date date, boolean isLoan, double downPayment, Double interestRate, int year, Double amount, Double discount, Double dueAmount, Double emiAmount, Building building, Floor floor, Unit unit, Customer customer) {
         this.id = id;
-        this.buildingId = buildingId;
-        this.floorId = floorId;
-        this.unitId = unitId;
-        this.customerId = customerId;
         this.date = date;
         this.isLoan = isLoan;
         this.downPayment = downPayment;
@@ -46,6 +57,10 @@ public class Booking {
         this.discount = discount;
         this.dueAmount = dueAmount;
         this.emiAmount = emiAmount;
+        this.building = building;
+        this.floor = floor;
+        this.unit = unit;
+        this.customer = customer;
     }
 
     public int getId() {
@@ -54,38 +69,6 @@ public class Booking {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getBuildingId() {
-        return buildingId;
-    }
-
-    public void setBuildingId(int buildingId) {
-        this.buildingId = buildingId;
-    }
-
-    public int getFloorId() {
-        return floorId;
-    }
-
-    public void setFloorId(int floorId) {
-        this.floorId = floorId;
-    }
-
-    public int getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public Date getDate() {
@@ -158,5 +141,37 @@ public class Booking {
 
     public void setEmiAmount(Double emiAmount) {
         this.emiAmount = emiAmount;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
