@@ -2,7 +2,6 @@ package com.eiasinprodhan.crems.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -20,7 +19,7 @@ public class Floor {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "project", "siteManager", "building"})
     private Building building;
 
     @OneToMany(mappedBy = "floor", cascade = CascadeType.ALL, orphanRemoval = true)

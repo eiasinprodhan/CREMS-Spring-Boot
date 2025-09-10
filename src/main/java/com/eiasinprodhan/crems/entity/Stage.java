@@ -20,16 +20,8 @@ public class Stage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "floor_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "building"})
     private Floor floor;
-
-    @OneToMany(mappedBy = "stage", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<Attendance>  attendances;
-
-    @OneToMany(mappedBy = "stage", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<StagePayment> stagePayments;
 
     @OneToMany(mappedBy = "stage", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
