@@ -39,8 +39,8 @@ public class SecurityConfiguration {
                                 "/images/**",
                                 "/api/employees/"
                         ).permitAll()
-                        .requestMatchers("/").hasRole("PROJECT_MANAGER")
-                        .requestMatchers("/").hasRole("ADMIN")
+                        .requestMatchers("/projects").hasRole("PROJECT_MANAGER")
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

@@ -29,7 +29,11 @@ public class EmployeeService {
         return employeeRepository.findByRole(role);
     }
 
-    public Employee save(Employee employee, MultipartFile file) {
+    public Employee save(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public Employee update(Employee employee, MultipartFile file) {
         if(file != null && !file.isEmpty()) {
             String fileName = photoService.savePhoto(employee, "/employees",  file);
             employee.setPhoto(fileName);
