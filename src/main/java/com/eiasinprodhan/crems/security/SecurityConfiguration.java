@@ -37,10 +37,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(
                                 "/images/**",
-                                "/api/employees/"
+                                "/api/auth/login"
                         ).permitAll()
                         .requestMatchers("/projects").hasRole("PROJECT_MANAGER")
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/api/employees/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

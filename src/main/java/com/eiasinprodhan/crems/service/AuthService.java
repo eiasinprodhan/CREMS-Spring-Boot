@@ -65,18 +65,6 @@ public class AuthService {
     private EmployeeService employeeService;
 
 
-    public void saveOrUpdate(User user, MultipartFile imageFile) {
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String filename = photoService.savePhoto(user, "users", imageFile);
-            user.setPhoto(filename);
-        }
-
-
-        user.setRole(Role.ADMIN);
-        userRepository.save(user);
-        sendActivationEmail(user);
-    }
-
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -88,7 +76,6 @@ public class AuthService {
     public void delete(User user) {
         userRepository.delete(user);
     }
-
 
     private void sendActivationEmail(User user) {
         String subject = "Welcome to Our Service – Confirm Your Registration";
@@ -144,7 +131,7 @@ public class AuthService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(true);
+        user.setActive(false);
         User savedUser = userRepository.save(user);
 
         employee.setUser(savedUser);
@@ -152,8 +139,6 @@ public class AuthService {
 
         String jwt = jwtService.generateToken(savedUser);
         saveUserToken(jwt, savedUser);
-
-        sendActivationEmail(savedUser);
     }
 
 
@@ -162,24 +147,18 @@ public class AuthService {
         token.setToken(jwt);
         token.setLogOut(false);
         token.setUser(user);
-
         tokenRepository.save(token);
-
     }
 
     private void removeAllTokenByUser(User user) {
-
         List<Token> validTokens = tokenRepository.findAllTokensByUserId(user.getId());
-
         if (validTokens.isEmpty()) {
             return;
         }
         validTokens.forEach(t -> {
             t.setLogOut(true);
         });
-
         tokenRepository.saveAll(validTokens);
-
     }
 
 

@@ -7,10 +7,12 @@ import com.eiasinprodhan.crems.service.EmployeeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +51,7 @@ public class EmployeeRestController {
         Employee employee = objectMapper.readValue(employeeJson, Employee.class);
 
         try {
-            employeeService.
+            authService.registerEmployee(user, file, employee);
             Map<String, String> response = new HashMap<>();
             response.put("Message", "User Added Successfully ");
 
@@ -60,8 +62,6 @@ public class EmployeeRestController {
             errorResponse.put("Message", "User Add Faild " + e);
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
     }
 
 
@@ -82,7 +82,7 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/login")
-    public Employee login(@RequestParam  String email, @RequestParam String password) {
+    public Employee login(@RequestParam String email, @RequestParam String password) {
         return employeeService.login(email, password);
     }
 
