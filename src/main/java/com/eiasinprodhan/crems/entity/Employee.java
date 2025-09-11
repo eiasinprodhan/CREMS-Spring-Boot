@@ -45,11 +45,15 @@ public class Employee {
     @JsonIgnore
     private List<Building> buildings;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 
     public Employee() {
     }
 
-    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary, List<Project> projects, List<Building> buildings) {
+    public Employee(int id, String name, String email, String password, String phone, Long nid, Date joiningDate, String role, String salaryType, Double salary, boolean status, String photo, String country, String address, Double totalSalary, Date lastSalary, List<Project> projects, List<Building> buildings, User user) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -68,6 +72,7 @@ public class Employee {
         this.lastSalary = lastSalary;
         this.projects = projects;
         this.buildings = buildings;
+        this.user = user;
     }
 
     public int getId() {
@@ -212,5 +217,13 @@ public class Employee {
 
     public void setBuildings(List<Building> buildings) {
         this.buildings = buildings;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

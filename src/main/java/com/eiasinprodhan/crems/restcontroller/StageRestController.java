@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/stages")
-@CrossOrigin("*")
 public class StageRestController {
 
     @Autowired
