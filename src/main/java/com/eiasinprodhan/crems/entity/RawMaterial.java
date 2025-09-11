@@ -20,7 +20,7 @@ public class RawMaterial {
     @JsonIgnore
     private List<StockIn> stockIns;
 
-    @OneToMany(mappedBy = "rawMaterial", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "rawMaterial", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<StockOut> stockOuts;
 

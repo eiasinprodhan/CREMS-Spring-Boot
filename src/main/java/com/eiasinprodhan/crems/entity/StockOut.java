@@ -11,7 +11,7 @@ public class StockOut {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
     private Date date;
@@ -31,7 +31,7 @@ public class StockOut {
     public StockOut() {
     }
 
-    public StockOut(int id, String name, Date date, Long quantity, String unit, RawMaterial rawMaterial, Stage stage) {
+    public StockOut(Integer id, String name, Date date, Long quantity, String unit, RawMaterial rawMaterial, Stage stage) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -41,11 +41,11 @@ public class StockOut {
         this.stage = stage;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

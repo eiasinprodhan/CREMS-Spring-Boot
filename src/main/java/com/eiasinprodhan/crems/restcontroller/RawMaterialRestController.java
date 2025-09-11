@@ -15,7 +15,13 @@ import java.util.List;
 public class RawMaterialRestController {
 
     @Autowired
-    private RawMaterialService  rawMaterialService;
+    private RawMaterialService rawMaterialService;
+
+    @PostMapping("/")
+    public RawMaterial save(@RequestBody RawMaterial rawMaterial) {
+        return rawMaterialService.save(rawMaterial);
+    }
+
 
     @GetMapping("/")
     public List<RawMaterial> findAll() {
@@ -26,5 +32,11 @@ public class RawMaterialRestController {
     public RawMaterial update(@RequestBody RawMaterial rawMaterial) {
         return rawMaterialService.save(rawMaterial);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        rawMaterialService.delete(id);
+    }
+
 
 }

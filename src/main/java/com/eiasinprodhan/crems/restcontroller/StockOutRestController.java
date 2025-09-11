@@ -28,8 +28,10 @@ public class StockOutRestController {
 
     @PostMapping("/")
     public StockOut save(@RequestBody StockOut stockOut) {
-        return stockOutService.save(stockOut);
+        System.out.println("Saving StockOut: " + stockOut);
+        return stockOutService.save(stockOut); // this should persist now
     }
+
 
     @PutMapping("/")
     public StockOut update(@RequestBody StockOut stockOut) {

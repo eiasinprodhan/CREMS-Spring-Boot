@@ -25,7 +25,8 @@ public class RawMaterialService {
         return rawMaterialRepository.findById(id).get();
     }
 
-    public void delete(RawMaterial rawMaterial) {
-        rawMaterialRepository.delete(rawMaterial);
+    public void delete(Integer id){
+        rawMaterialRepository.deleteById(id);
     }
+
 }
