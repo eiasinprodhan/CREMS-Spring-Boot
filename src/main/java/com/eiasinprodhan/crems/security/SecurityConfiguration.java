@@ -40,9 +40,26 @@ public class SecurityConfiguration {
                                 "/api/auth/login",
                                 "/api/auth/active/**"
                         ).permitAll()
-                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/buildings/**", "/api/floors/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("SITE_MANAGER")
-                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/bookings/**", "/api/buildings/**", "/api/floors/**", "/api/projects/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("PROJECT_MANAGER")
-                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/bookings/**", "/api/buildings/**", "/api/customers/**", "/api/employees/**", "/api/floors/**", "/api/projects/**", "/api/rawmaterials/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockindetails/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/api/auth/logout",
+                                "/api/attendances/**",
+                                "/api/bookings/**",
+                                "/api/buildings/**",
+                                "/api/floors/**",
+                                "/api/projects/**",
+                                "/api/stagepayments/**",
+                                "/api/stages/**",
+                                "/api/stockoutdetails/**",
+                                "/api/transactions/**",
+                                "/api/units/**",
+                                "/api/employees/**",
+                                "/api/rawmaterials/**"
+                        ).hasAnyRole("SITE_MANAGER", "PROJECT_MANAGER", "ADMIN")
+
+                        .requestMatchers(
+                                "/api/customers/**",
+                                "/api/stockindetails/**"
+                        ).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
