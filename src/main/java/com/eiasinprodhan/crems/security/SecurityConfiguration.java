@@ -37,10 +37,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(
                                 "/images/**",
-                                "/api/auth/login"
+                                "/api/auth/login",
+                                "/api/auth/active/**"
                         ).permitAll()
-                        .requestMatchers("/projects").hasRole("PROJECT_MANAGER")
-                        .requestMatchers("/api/employees/**").hasRole("ADMIN")
+                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/buildings/**", "/api/floors/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("SITE_MANAGER")
+                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/bookings/**", "/api/buildings/**", "/api/floors/**", "/api/projects/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("PROJECT_MANAGER")
+                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/bookings/**", "/api/buildings/**", "/api/customers/**", "/api/employees/**", "/api/floors/**", "/api/projects/**", "/api/rawmaterials/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockindetails/**", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("ADMIN")
+                        .requestMatchers("/api/attendances/**", "/api/auth/logout", "/api/bookings/**", "/api/buildings/**", "/api/customers/**", "/api/employees/**", "/api/floors/**", "/api/projects/**", "/api/rawmaterials/**", "/api/stagepayments/**", "/api/stages/**", "/api/stockindetails", "/api/stockoutdetails/**", "/api/transactions/**", "/api/units/**").hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
