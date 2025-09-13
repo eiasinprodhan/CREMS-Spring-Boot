@@ -34,6 +34,8 @@ public class BuildingService {
     }
 
     public void delete(int id) {
+        Building building = buildingRepository.findById(id).get();
+        photoService.deletePhoto("buildings", building.getPhoto());
         buildingRepository.deleteById(id);
     }
 

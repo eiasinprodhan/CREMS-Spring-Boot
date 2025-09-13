@@ -102,6 +102,13 @@ public class PhotoService {
         return savedFileNames;
     }
 
-
+    public void deletePhoto(String subDirectory, String fileName) {
+       Path filePath = Paths.get(uploadDir + subDirectory + "/" + fileName);
+        try {
+            Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
