@@ -45,7 +45,7 @@ public class Employee {
     @JsonIgnore
     private List<Building> buildings;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

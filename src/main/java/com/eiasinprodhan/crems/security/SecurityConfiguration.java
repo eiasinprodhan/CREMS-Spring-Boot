@@ -38,7 +38,10 @@ public class SecurityConfiguration {
                         .requestMatchers(
                                 "/images/**",
                                 "/api/auth/login",
-                                "/api/auth/active/**"
+                                "/api/auth/active/**",
+                                "/api/buildings/",
+                                "/api/units/"
+
                         ).permitAll()
                         .requestMatchers(
                                 "/api/auth/logout",
