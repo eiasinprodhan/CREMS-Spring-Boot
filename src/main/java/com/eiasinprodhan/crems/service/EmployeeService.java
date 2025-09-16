@@ -57,4 +57,8 @@ public class EmployeeService {
         };
         return employee;
     }
+
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
 }

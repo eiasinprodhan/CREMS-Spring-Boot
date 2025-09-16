@@ -86,4 +86,9 @@ public class EmployeeRestController {
         return employeeService.login(email, password);
     }
 
+    @GetMapping("/email/{email}")
+    public Employee findByEmail(@PathVariable String email) {
+        return employeeService.findByEmail(email);
+    }
+
 }
