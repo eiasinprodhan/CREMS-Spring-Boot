@@ -42,7 +42,6 @@ public class SecurityConfiguration {
                                 "/api/buildings/",
                                 "/api/units/",
                                 "/api/employees/**"
-
                         ).permitAll()
                         .requestMatchers(
                                 "/api/auth/logout",

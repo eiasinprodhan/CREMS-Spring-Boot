@@ -26,6 +26,7 @@ public class BookingRestController {
 
     @PostMapping("/")
     public Booking create(@RequestBody Booking booking){
+        System.out.println("Loan Result" + booking.isLoan());
         return bookingService.save(booking);
     }
 

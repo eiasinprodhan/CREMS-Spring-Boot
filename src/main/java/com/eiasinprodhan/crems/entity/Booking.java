@@ -1,6 +1,7 @@
 package com.eiasinprodhan.crems.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -11,13 +12,16 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private Date date;
+
+    @JsonProperty("isLoan")
     private boolean isLoan;
+
     private double downPayment;
     private Double interestRate;
-    private int year;
+    private Integer year;
     private Double amount;
     private Double discount;
     private Double dueAmount;
@@ -46,7 +50,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int id, Date date, boolean isLoan, double downPayment, Double interestRate, int year, Double amount, Double discount, Double dueAmount, Double emiAmount, Building building, Floor floor, Unit unit, Customer customer) {
+    public Booking(Integer id, Date date, boolean isLoan, double downPayment, Double interestRate, Integer year, Double amount, Double discount, Double dueAmount, Double emiAmount, Building building, Floor floor, Unit unit, Customer customer) {
         this.id = id;
         this.date = date;
         this.isLoan = isLoan;
@@ -63,11 +67,11 @@ public class Booking {
         this.customer = customer;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -103,11 +107,11 @@ public class Booking {
         this.interestRate = interestRate;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

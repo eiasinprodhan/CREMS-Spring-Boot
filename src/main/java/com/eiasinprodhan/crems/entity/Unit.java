@@ -31,7 +31,7 @@ public class Unit {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Floor floor;
 
-    @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Booking> bookings;
 
