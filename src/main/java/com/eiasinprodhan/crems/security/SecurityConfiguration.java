@@ -56,7 +56,8 @@ public class SecurityConfiguration {
                                 "/api/transactions/**",
                                 "/api/units/**",
                                 "/api/rawmaterials/**",
-                                "/images/employees/**"
+                                "/images/employees/**",
+                                "/api/loanpayments/**"
                         ).hasAnyRole("SITE_MANAGER", "PROJECT_MANAGER", "ADMIN")
 
                         .requestMatchers(
