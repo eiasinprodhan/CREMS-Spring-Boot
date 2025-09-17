@@ -40,8 +40,9 @@ public class SecurityConfiguration {
                                 "/api/auth/login",
                                 "/api/auth/active/**",
                                 "/api/buildings/",
-                                "/api/units/",
-                                "/api/employees/**"
+                                "/api/units/**",
+                                "/api/employees/**",
+                                "/api/loanpayments/**"
                         ).permitAll()
                         .requestMatchers(
                                 "/api/auth/logout",
@@ -56,8 +57,7 @@ public class SecurityConfiguration {
                                 "/api/transactions/**",
                                 "/api/units/**",
                                 "/api/rawmaterials/**",
-                                "/images/employees/**",
-                                "/api/loanpayments/**"
+                                "/images/employees/**"
                         ).hasAnyRole("SITE_MANAGER", "PROJECT_MANAGER", "ADMIN")
 
                         .requestMatchers(
