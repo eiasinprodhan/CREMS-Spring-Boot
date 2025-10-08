@@ -3,6 +3,7 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.Customer;
 import com.eiasinprodhan.crems.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +16,41 @@ public class CustomerRestController {
     private CustomerService customerService;
 
     @GetMapping("/")
-    public List<Customer> findAll() {
-        return customerService.findAll();
+    public ResponseEntity<List<Customer>> findAll() {
+        List<Customer> customers = customerService.findAll();
+        return ResponseEntity.ok(customers);
     }
 
     @GetMapping("/{id}")
-    public Customer findById(@PathVariable Integer id) {
-        return customerService.findById(id);
+    public ResponseEntity<Customer> findById(@PathVariable Integer id) {
+        Customer customer = customerService.findById(id);
+        if (customer != null) {
+            return ResponseEntity.ok(customer);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/")
-    public Customer save(@RequestBody Customer customer) {
-        return customerService.save(customer);
+    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+        Customer savedCustomer = customerService.save(customer);
+        return ResponseEntity.ok(savedCustomer);
     }
 
     @PutMapping("/")
-    public Customer update(@RequestBody Customer customer) {
-        return customerService.save(customer);
+    public ResponseEntity<Customer> update(@RequestBody Customer customer) {
+        Customer updatedCustomer = customerService.save(customer);
+        return ResponseEntity.ok(updatedCustomer);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        customerService.deleteById(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        Customer customer = customerService.findById(id);
+        if (customer != null) {
+            customerService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

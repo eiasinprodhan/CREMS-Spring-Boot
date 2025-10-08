@@ -3,7 +3,6 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.RawMaterial;
 import com.eiasinprodhan.crems.service.RawMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,25 +16,35 @@ public class RawMaterialRestController {
     private RawMaterialService rawMaterialService;
 
     @PostMapping("/")
-    public RawMaterial save(@RequestBody RawMaterial rawMaterial) {
-        return rawMaterialService.save(rawMaterial);
+    public ResponseEntity<RawMaterial> save(@RequestBody RawMaterial rawMaterial) {
+        RawMaterial saved = rawMaterialService.save(rawMaterial);
+        return ResponseEntity.ok(saved);
     }
 
-
     @GetMapping("/")
-    public List<RawMaterial> findAll() {
-        return rawMaterialService.findAll();
+    public ResponseEntity<List<RawMaterial>> findAll() {
+        List<RawMaterial> materials = rawMaterialService.findAll();
+        return ResponseEntity.ok(materials);
     }
 
     @PutMapping("/")
-    public RawMaterial update(@RequestBody RawMaterial rawMaterial) {
-        return rawMaterialService.save(rawMaterial);
+    public ResponseEntity<RawMaterial> update(@RequestBody RawMaterial rawMaterial) {
+        RawMaterial updated = rawMaterialService.save(rawMaterial);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        rawMaterialService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        RawMaterial existing = rawMaterialService.findById(id);
+        if (existing != null) {
+            rawMaterialService.delete(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
-
 }

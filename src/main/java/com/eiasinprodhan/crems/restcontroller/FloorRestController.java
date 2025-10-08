@@ -3,6 +3,7 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.Floor;
 import com.eiasinprodhan.crems.service.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +16,47 @@ public class FloorRestController {
     private FloorService floorService;
 
     @GetMapping("/")
-    public List<Floor> findAll() {
-        return floorService.findAll();
+    public ResponseEntity<List<Floor>> findAll() {
+        List<Floor> floors = floorService.findAll();
+        return ResponseEntity.ok(floors);
     }
 
     @GetMapping("/{id}")
-    public Floor findById(@PathVariable int id) {
-        return floorService.findById(id);
+    public ResponseEntity<Floor> findById(@PathVariable int id) {
+        Floor floor = floorService.findById(id);
+        if (floor != null) {
+            return ResponseEntity.ok(floor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/")
-    public Floor save(@RequestBody Floor floor) {
-        return floorService.save(floor);
+    public ResponseEntity<Floor> save(@RequestBody Floor floor) {
+        Floor savedFloor = floorService.save(floor);
+        return ResponseEntity.ok(savedFloor);
     }
 
     @PutMapping("/")
-    public Floor update(@RequestBody Floor floor) {
-        return floorService.save(floor);
+    public ResponseEntity<Floor> update(@RequestBody Floor floor) {
+        Floor updatedFloor = floorService.save(floor);
+        return ResponseEntity.ok(updatedFloor);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        floorService.deleteById(id);
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        Floor floor = floorService.findById(id);
+        if (floor != null) {
+            floorService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("")
-    public List<Floor> findAllByBuilding(@RequestParam int building) {
-        return floorService.findAllByBuilding(building);
+    public ResponseEntity<List<Floor>> findAllByBuilding(@RequestParam int building) {
+        List<Floor> floors = floorService.findAllByBuilding(building);
+        return ResponseEntity.ok(floors);
     }
 }

@@ -3,6 +3,7 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.Booking;
 import com.eiasinprodhan.crems.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +16,42 @@ public class BookingRestController {
     private BookingService bookingService;
 
     @GetMapping("/")
-    public List<Booking> findAll(){
-        return bookingService.findAll();
+    public ResponseEntity<List<Booking>> findAll() {
+        List<Booking> bookings = bookingService.findAll();
+        return ResponseEntity.ok(bookings);
     }
 
     @GetMapping("/{id}")
-    public Booking findById(@PathVariable Integer id){
-        return bookingService.findById(id);
+    public ResponseEntity<Booking> findById(@PathVariable Integer id) {
+        Booking booking = bookingService.findById(id);
+        if (booking != null) {
+            return ResponseEntity.ok(booking);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/")
-    public Booking create(@RequestBody Booking booking){
-        System.out.println("Loan Result" + booking.isLoan());
-        return bookingService.save(booking);
+    public ResponseEntity<Booking> create(@RequestBody Booking booking) {
+        System.out.println("Loan Result: " + booking.isLoan());
+        Booking savedBooking = bookingService.save(booking);
+        return ResponseEntity.ok(savedBooking);
     }
 
     @PutMapping("/")
-    public Booking update(@RequestBody Booking booking){
-        return bookingService.save(booking);
+    public ResponseEntity<Booking> update(@RequestBody Booking booking) {
+        Booking updatedBooking = bookingService.save(booking);
+        return ResponseEntity.ok(updatedBooking);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id){
-        bookingService.deleteById(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        Booking booking = bookingService.findById(id);
+        if (booking != null) {
+            bookingService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

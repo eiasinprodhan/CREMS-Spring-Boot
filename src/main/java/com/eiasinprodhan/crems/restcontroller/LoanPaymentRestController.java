@@ -3,6 +3,7 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.LoanPayment;
 import com.eiasinprodhan.crems.service.LoanPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +16,47 @@ public class LoanPaymentRestController {
     private LoanPaymentService loanPaymentService;
 
     @PostMapping("/")
-    public LoanPayment createLoanPayment(@RequestBody LoanPayment loanPayment) {
-        return loanPaymentService.saveLoanPayment(loanPayment);
+    public ResponseEntity<LoanPayment> createLoanPayment(@RequestBody LoanPayment loanPayment) {
+        LoanPayment saved = loanPaymentService.saveLoanPayment(loanPayment);
+        return ResponseEntity.ok(saved);
     }
 
     @GetMapping("/")
-    public List<LoanPayment> getLoanPayments() {
-        return loanPaymentService.getLoanPayments();
+    public ResponseEntity<List<LoanPayment>> getLoanPayments() {
+        List<LoanPayment> list = loanPaymentService.getLoanPayments();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public LoanPayment getLoanPaymentById(@PathVariable Integer id) {
-        return loanPaymentService.getLoanPaymentById(id);
+    public ResponseEntity<LoanPayment> getLoanPaymentById(@PathVariable Integer id) {
+        LoanPayment loanPayment = loanPaymentService.getLoanPaymentById(id);
+        if (loanPayment != null) {
+            return ResponseEntity.ok(loanPayment);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/")
-    public LoanPayment updateLoanPayment(@RequestBody LoanPayment loanPayment) {
-        return loanPaymentService.saveLoanPayment(loanPayment);
+    public ResponseEntity<LoanPayment> updateLoanPayment(@RequestBody LoanPayment loanPayment) {
+        LoanPayment updated = loanPaymentService.saveLoanPayment(loanPayment);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLoanPaymentById(@PathVariable Integer id) {
-        loanPaymentService.deleteLoanPaymentById(id);
+    public ResponseEntity<Void> deleteLoanPaymentById(@PathVariable Integer id) {
+        LoanPayment loanPayment = loanPaymentService.getLoanPaymentById(id);
+        if (loanPayment != null) {
+            loanPaymentService.deleteLoanPaymentById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/booking/{id}")
-    public List<LoanPayment> findLoanPaymentByBooking_Id(@PathVariable Integer id) {
-        return loanPaymentService.findLoanPaymentByBooking_Id(id);
+    public ResponseEntity<List<LoanPayment>> findLoanPaymentByBooking_Id(@PathVariable Integer id) {
+        List<LoanPayment> list = loanPaymentService.findLoanPaymentByBooking_Id(id);
+        return ResponseEntity.ok(list);
     }
 }

@@ -3,6 +3,7 @@ package com.eiasinprodhan.crems.restcontroller;
 import com.eiasinprodhan.crems.entity.StockIn;
 import com.eiasinprodhan.crems.service.StockInService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +16,42 @@ public class StockInRestController {
     private StockInService stockInService;
 
     @GetMapping("/")
-    public List<StockIn> findAll() {
-        return stockInService.findAll();
+    public ResponseEntity<List<StockIn>> findAll() {
+        List<StockIn> stockIns = stockInService.findAll();
+        return ResponseEntity.ok(stockIns);
     }
 
     @GetMapping("/{id}")
-    public StockIn findById(@PathVariable Integer id) {
-        return stockInService.findById(id);
+    public ResponseEntity<StockIn> findById(@PathVariable Integer id) {
+        StockIn stockIn = stockInService.findById(id);
+        if (stockIn == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(stockIn);
     }
 
     @PostMapping("/")
-    public StockIn save(@RequestBody StockIn stockIn) {
-        return stockInService.save(stockIn);
+    public ResponseEntity<StockIn> save(@RequestBody StockIn stockIn) {
+        StockIn saved = stockInService.save(stockIn);
+        return ResponseEntity.ok(saved);
     }
 
     @PutMapping("/")
-    public StockIn update(@RequestBody StockIn stockIn) {
-        return stockInService.save(stockIn);
+    public ResponseEntity<StockIn> update(@RequestBody StockIn stockIn) {
+        StockIn updated = stockInService.save(stockIn);
+        if (updated == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        StockIn existing = stockInService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         stockInService.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
 }

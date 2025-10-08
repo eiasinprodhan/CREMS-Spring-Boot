@@ -5,6 +5,7 @@ import com.eiasinprodhan.crems.service.UnitService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,49 +19,69 @@ public class UnitRestController {
     private UnitService unitService;
 
     @GetMapping("/")
-    public List<Unit> getUnits() {
-        return unitService.findAll();
+    public ResponseEntity<List<Unit>> getUnits() {
+        List<Unit> units = unitService.findAll();
+        return ResponseEntity.ok(units);
     }
 
     @GetMapping("/{id}")
-    public Unit getUnit(@PathVariable Integer id) {
-        return unitService.findById(id);
+    public ResponseEntity<Unit> getUnit(@PathVariable Integer id) {
+        Unit unit = unitService.findById(id);
+        if (unit == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(unit);
     }
 
     @PostMapping("/")
-    public Unit save(
+    public ResponseEntity<Unit> save(
             @RequestPart(value = "unit") String unitJson,
             @RequestParam(value = "photos") MultipartFile[] photos
     ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Unit unit = mapper.readValue(unitJson, Unit.class);
 
-        return  unitService.save(unit, photos);
+        Unit savedUnit = unitService.save(unit, photos);
+        return ResponseEntity.ok(savedUnit);
     }
 
     @PutMapping("/")
-    public Unit update(
+    public ResponseEntity<Unit> update(
             @RequestPart(value = "unit") String unitJson,
             @RequestParam(value = "photos") MultipartFile[] photos
     ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Unit unit = mapper.readValue(unitJson, Unit.class);
 
-        return  unitService.save(unit, photos);
+        Unit updatedUnit = unitService.save(unit, photos);
+        if (updatedUnit == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedUnit);
     }
 
     @PutMapping("/updateunitforbook")
-    public Unit updateUnitForBook(@RequestBody Unit unit) {
-        return unitService.updateUnitForBook(unit);
+    public ResponseEntity<Unit> updateUnitForBook(@RequestBody Unit unit) {
+        Unit updatedUnit = unitService.updateUnitForBook(unit);
+        if (updatedUnit == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedUnit);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        Unit existing = unitService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         unitService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/productdetails/{id}")
-    public List<Unit> findUnitByBuildingId(@PathVariable Integer id) {
-        return unitService.findByBuildingId(id);
+    public ResponseEntity<List<Unit>> findUnitByBuildingId(@PathVariable Integer id) {
+        List<Unit> units = unitService.findByBuildingId(id);
+        return ResponseEntity.ok(units);
     }
 }

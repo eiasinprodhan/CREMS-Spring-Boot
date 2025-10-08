@@ -22,22 +22,30 @@ public class EmployeeRestController {
 
     @Autowired
     private EmployeeService employeeService;
+
     @Autowired
     private AuthService authService;
 
     @GetMapping("/")
-    public List<Employee> findAll() {
-        return employeeService.findAll();
+    public ResponseEntity<List<Employee>> findAll() {
+        List<Employee> employees = employeeService.findAll();
+        return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{id}")
-    public Employee findById(@PathVariable int id) {
-        return employeeService.findById(id);
+    public ResponseEntity<Employee> findById(@PathVariable int id) {
+        Employee employee = employeeService.findById(id);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping
-    public List<Employee> findByRole(@RequestParam String role) {
-        return employeeService.findByRole(role);
+    public ResponseEntity<List<Employee>> findByRole(@RequestParam String role) {
+        List<Employee> employees = employeeService.findByRole(role);
+        return ResponseEntity.ok(employees);
     }
 
     @PostMapping("/")
@@ -53,42 +61,58 @@ public class EmployeeRestController {
         try {
             authService.registerEmployee(user, file, employee);
             Map<String, String> response = new HashMap<>();
-            response.put("Message", "User Added Successfully ");
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            response.put("Message", "User Added Successfully");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-
             Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("Message", "User Add Faild " + e);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+            errorResponse.put("Message", "User Add Failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
-
     @PutMapping("/")
-    public Employee update(
+    public ResponseEntity<Employee> update(
             @RequestPart(value = "employee") String employeeJson,
             @RequestParam(value = "photo") MultipartFile file
     ) throws JsonProcessingException {
-        System.out.println("jkgfa");
         ObjectMapper objectMapper = new ObjectMapper();
         Employee employee = objectMapper.readValue(employeeJson, Employee.class);
-        return employeeService.update(employee, file);
+        Employee updatedEmployee = employeeService.update(employee, file);
+        if (updatedEmployee != null) {
+            return ResponseEntity.ok(updatedEmployee);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        employeeService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        Employee employee = employeeService.findById(id);
+        if (employee != null) {
+            employeeService.delete(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/login")
-    public Employee login(@RequestParam String email, @RequestParam String password) {
-        return employeeService.login(email, password);
+    public ResponseEntity<Employee> login(@RequestParam String email, @RequestParam String password) {
+        Employee employee = employeeService.login(email, password);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @GetMapping("/email/{email}")
-    public Employee findByEmail(@PathVariable String email) {
-        return employeeService.findByEmail(email);
+    public ResponseEntity<Employee> findByEmail(@PathVariable String email) {
+        Employee employee = employeeService.findByEmail(email);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 }
