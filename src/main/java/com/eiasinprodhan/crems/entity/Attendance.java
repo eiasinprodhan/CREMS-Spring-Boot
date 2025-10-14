@@ -2,8 +2,6 @@ package com.eiasinprodhan.crems.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "attendances")
 public class Attendance {
